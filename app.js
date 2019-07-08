@@ -84,14 +84,14 @@ app.post('/api/v1/thermostats/:id',(req,res) => {
     }
     const thermostat = {
       id: db.length +1,
-      deviceName = req.body.deviceName,
-      modelNumber = req.body.modelNumber,
-      productCode = req.body.productCode,
-      serialNumber = req.body.serialNumber,
-      registered = req.body.registered,
-      room = req.body.room,
-      address = req.body.address,
-      postalCode = req.body.postalCode
+      deviceName: req.body.deviceName,
+      modelNumber: req.body.modelNumber,
+      productCode: req.body.productCode,
+      serialNumber: req.body.serialNumber,
+      registered: req.body.registered,
+      room: req.body.room,
+      address: req.body.address,
+      postalCode: req.body.postalCode
     }
   db.push(thermostat);
   return res.status(201).send({
@@ -131,9 +131,6 @@ db.map((thermostat,index) => {
   })
 
 })
-
-
-
 
 const PORT = 5000
 
