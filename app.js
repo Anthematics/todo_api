@@ -35,7 +35,7 @@ app.get('/api/v1/thermostats/:id', (req,res) => {
   });
 });
 
-app.post('/api/v1/thermostats/:id',(req,res) => {
+app.post('/api/v1/thermostats/',(req,res) => {
   if (!req.body.deviceName) {
     return res.status(400).send({
       success: 'false',
