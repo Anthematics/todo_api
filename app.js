@@ -132,7 +132,7 @@ db.map((thermostat,index) => {
 
 })
 
-app.put('/api/v1/thermostats/:id'), (req,res) => {
+app.put('/api/v1/thermostats/:id', (req,res) => {
   const id = parseInt(req.params.id,10)
   let foundThermostat;
   let thermostatIndex;
@@ -196,10 +196,23 @@ app.put('/api/v1/thermostats/:id'), (req,res) => {
     }
     const updatedThermostat = {
       id: foundThermostat.id,
-
-
-    }
-}
+      deviceName:  req.body.deviceName || foundThermostat.deviceName,
+      deviceType: req.body.deviceType|| foundThermostat.deviceType,
+      modelNumber:req.body.modelNumber||foundThermostat.modelNumber,
+      productCode:req.body.productCode||foundThermostat.productCode,
+      serialNumber:req.body.serialNumber||foundThermostat.serialNumber,
+      registered:req.body.registered||foundThermostat.registered,
+      room:req.body.room||foundThermostat.room,
+      address:req.body.address||foundThermostat.address,
+      postalCode:req.body.postalCode||foundThermostat.postalCode,
+    };
+    db.splice(thermostatIndex,1,updatedThermostat);
+    return res.status(201).send({
+      success: 'true',
+      message: 'updated successfully',
+      updatedThermostat,
+    });
+});
 
 const PORT = 5000
 
