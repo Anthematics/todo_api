@@ -132,6 +132,75 @@ db.map((thermostat,index) => {
 
 })
 
+app.put('/api/v1/thermostats/:id'), (req,res) => {
+  const id = parseInt(req.params.id,10)
+  let foundThermostat;
+  let thermostatIndex;
+
+  db.map((thermostat,index) => {
+    if (thermostat.id === id) {
+      foundThermostat = thermostat
+      thermostatIndex = index
+    }
+  });
+  if (!foundThermostat) {
+    return res.status(400).send({
+      success: 'false',
+      message: 'thermostat not found'
+    })
+  } else if (!req.body.deviceName) {
+    return res.status(400).send({
+      success: 'false',
+      message: 'no device name specified'
+    });
+    } else if (!req.body.deviceType) {
+      return res.status(400).send({
+        success: 'false',
+        message: 'no device type specified'
+      });
+    } else if (!req.body.modelNumber) {
+      return res.status(400).send({
+        success: 'false',
+        message: 'no model number specified'
+      });
+    } else if (!req.body.productCode) {
+      return res.status(400).send({
+        success: 'false',
+        message: 'No given product code'
+      });
+    } else if (!req.body.serialNumber) {
+      return res.status(400).send({
+        success:'false',
+        message: 'No given serial number'
+      });
+    } else if (!req.body.registered) {
+      return res.status(400).send({
+        success: 'false',
+        message: 'unsure if registered'
+      });
+    } else if (!req.body.room) {
+      return res.status(400).send({
+        success: 'false',
+        message: 'not given a room'
+      });
+    } else if (!req.body.address) {
+      return res.status(400).send({
+        success: 'false',
+        message: 'please provide address'
+      });
+    } else if (!req.body.postalCode) {
+      return res.status(400).send({
+        success: 'false',
+        message: 'no postal code / zip code given'
+      });
+    }
+    const updatedThermostat = {
+      id: foundThermostat.id,
+
+
+    }
+}
+
 const PORT = 5000
 
 app.listen(PORT, () => {
@@ -140,3 +209,4 @@ app.listen(PORT, () => {
 
 /*Now we can go to postman and test our endpoint, postman is an application we use to test our endpoints. you can download postman here.
 To test the endpoint we’ll go to localhost:5000/api/v1/todos. */
+
